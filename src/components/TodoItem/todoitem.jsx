@@ -1,6 +1,5 @@
-import React from 'react';
+import React from "react";
 
-
-const Todoitem = () => <div>Todo Items </div>;
+const Todoitem = (props) => <div>{props.title} </div>;
 
 export default Todoitem;
