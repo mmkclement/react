@@ -1,11 +1,35 @@
-import React from "react";
-import TodoItem from "../TodoItem/todoitem";
-const Todos = (props) => (
-  <div>
-    <h1>{props.title}</h1>
-    <TodoItem title= "Sound from bros" />
-    <TodoItem  title = "Start to the end "/>
-  </div>
-);
+import React, { Component } from "react";
+import TodoItem from "../TodoItem/Todoitem";
+
+class Todos extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: [
+        {
+          id: 1,
+          title: "play more",
+        },
+        {
+          id: 2,
+          title: "more ez",
+        },
+      ],
+    };
+  }
+
+  render = () => {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <ul>
+          {this.state.todos.map((todo) => (
+            <TodoItem title={todo.title} />
+          ))}
+        </ul>
+      </div>
+    );
+  };
+}
 
 export default Todos;
