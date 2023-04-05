@@ -13,30 +13,40 @@ class Todos extends Component {
         title: "more ez",
       },
     ],
-    todoTitle: "", // this is going to assign value={this.state.todoTitle }
+    todoTitle: "",
   };
 
   handleChange = (e) => {
     this.setState({
-      todoTitle: e.target.value,
+      [e.target.name]: e.target.value,
     });
+  };
+
+  createNewTodo = (e) => {
+    e.preventDefault();
+    const todos = [...this.state.todos]; // ... means new array don' touch original array
+    const id = todos.length ? todos[todos.length - 1].id + 1 : 1;
+    todos.push({ id, title: this.state.todoTitle });
+    this.setState({ todos });
   };
 
   render = () => {
     return (
       <div>
         <h1>{this.props.title}</h1>
-        <input
-          style={{ marginLeft: "4rem" }}
-          type="text"
-          name="title"
-          value={this.state.todoTitle}
-          onChange={this.handleChange}
-        />
-        <button>Save</button>
+        <form onSubmit={this.createNewTodo}>
+          <input
+            style={{ marginLeft: "4rem" }}
+            type="text"
+            name="todoTitle"
+            value={this.state.todoTitle}
+            onChange={this.handleChange}
+          />
+          <button type="submit">Save</button>
+        </form>
         <ul>
           {this.state.todos.map((todo) => (
-            <TodoItem title={todo.title} />
+            <TodoItem key={todo.id} title={todo.title} />
           ))}
         </ul>
       </div>
