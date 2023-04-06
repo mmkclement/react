@@ -31,7 +31,8 @@ class Todos extends Component {
   };
 
   deleteTodo = (id) => {
-    console.log(id);
+    const todos = [...this.state.todos];
+    this.setState({todos:  todos.filter (todo => todo.id !==id)})
   };
 
   render = () => {
