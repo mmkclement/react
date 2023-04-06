@@ -24,10 +24,14 @@ class Todos extends Component {
 
   createNewTodo = (e) => {
     e.preventDefault();
-    const todos = [...this.state.todos]; // ... means new array don' touch original array
+    const todos = [...this.state.todos];
     const id = todos.length ? todos[todos.length - 1].id + 1 : 1;
     todos.push({ id, title: this.state.todoTitle });
     this.setState({ todos });
+  };
+
+  deleteTodo = (id) => {
+    console.log(id);
   };
 
   render = () => {
@@ -46,7 +50,12 @@ class Todos extends Component {
         </form>
         <ul>
           {this.state.todos.map((todo) => (
-            <TodoItem key={todo.id} title={todo.title} />
+            <TodoItem
+              title={todo.title}
+              key={todo.id}
+              deleteTodo={this.deleteTodo}
+              id={todo.id}
+            />
           ))}
         </ul>
       </div>
